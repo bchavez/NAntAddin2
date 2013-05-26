@@ -1,0 +1,50 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="CreateDelivrable" >
+
+	<!-- Solution properties -->
+
+	<PropertyGroup>
+		<ProjectName>NAntAddin</ProjectName>
+		<BuildDir>$(MSBuildStartupDirectory)/build</BuildDir>
+		<ConfigDir>$(MSBuildStartupDirectory)/config</ConfigDir>
+		<BinaryDir>$(BuildDir)\bin</BinaryDir>
+	</PropertyGroup>
+
+	<!-- Clean Solution -->
+
+	<Target Name="Clean">
+		<RemoveDir Directories="$(BuildDir)" />	
+	</Target>
+
+	<!-- Initialize target folders -->
+
+	<Target Name="Init" DependsOnTargets="Clean">
+		<MakeDir Directories="$(BuildDir)" />
+		<MakeDir Directories="$(BinaryDir)" />
+		<MakeDir Directories="$(BuildDir)/$(ProjectName)" />
+	</Target>
+
+	<!-- Copy all required files into binary folder -->
+
+	<Target Name="Build" DependsOnTargets="Init" >
+		<MSBuild Projects="$(ProjectName).sln" Properties="Configuration=Release;WarningLevel=1;OutDir=$(BinaryDir)/" />
+	</Target>
+
+  <!-- Create the deliverable of the solution -->
+
+  <Target Name="CreateDelivrable" DependsOnTargets="Build">
+	
+	<CreateItem Include="$(BinaryDir)/*.dll;$(BinaryDir)/*.config">
+      <Output ItemName="DeliverableFiles" TaskParameter="Include"/>
+    </CreateItem>  
+  
+	<CreateItem Include="$(ConfigDir)/*.AddIn">
+      <Output ItemName="DeliverableConfig" TaskParameter="Include"/>
+    </CreateItem>  
+
+    <Copy SourceFiles="@(DeliverableConfig)" DestinationFolder="$(BuildDir)" />
+    <Copy SourceFiles="@(DeliverableFiles)" DestinationFolder="$(BuildDir)/NAntAddin" />
+	
+    <RemoveDir Directories="$(BinaryDir)" />
+  </Target>
+
+</Project>

@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C2FFF87F-6913-4424-9BA0-B5FB685DAC63}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <StartupObject>
+    </StartupObject>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>NAntAddin</AssemblyName>
+    <RootNamespace>NAntAddin</RootNamespace>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <IncrementalBuild>false</IncrementalBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <IncrementalBuild>false</IncrementalBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\VisualStudio\EnvDTE.dll</HintPath>
+    </Reference>
+    <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\VisualStudio\EnvDTE80.dll</HintPath>
+    </Reference>
+    <Reference Include="extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\VisualStudio\extensibility.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.CommandBars, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\VisualStudio\Microsoft.VisualStudio.CommandBars.dll</HintPath>
+    </Reference>
+    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\VisualStudio\stdole.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\Logic\NAntProcess.cs">
+    </Compile>
+    <Compile Include="Sources\Utils\AddInUtils.cs" />
+    <Compile Include="Sources\AddIn\Connect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Sources\Utils\TreeViewUtils.cs" />
+    <Compile Include="Sources\Utils\VisualStudioUtils.cs" />
+    <Compile Include="Sources\AppConstants.cs" />
+    <Compile Include="Sources\Logic\ViewController.cs" />
+    <Compile Include="Sources\Logic\TreeViewFactory.cs" />
+    <Compile Include="Sources\Xml\XmlAttribute.cs" />
+    <Compile Include="Sources\Xml\XmlNode.cs" />
+    <Compile Include="Sources\Xml\XmlDescriptor.cs" />
+    <Compile Include="Sources\Xml\XmlTree.cs" />
+    <Compile Include="Sources\Xml\XmlTreeFactory.cs" />
+    <Compile Include="Sources\View\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sources\View\AboutBox.designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\View\OptionsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sources\View\OptionsView.designer.cs">
+      <DependentUpon>OptionsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\View\NAntAddinView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sources\View\NAntAddinView.designer.cs">
+      <DependentUpon>NAntAddinView.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\CommandBar.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\View\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\View\OptionsView.resx">
+      <DependentUpon>OptionsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\View\NAntAddinView.resx">
+      <DependentUpon>NAntAddinView.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NAntAddin.AddIn" />
+    <Content Include="NAntAddin.AddIn.ForTesting.AddIn" />
+    <Content Include="Resources\all.gif" />
+    <Content Include="Resources\ant.bmp" />
+    <Content Include="Resources\ant_mask.bmp" />
+    <Content Include="Resources\delete.png" />
+    <Content Include="Resources\error.gif" />
+    <Content Include="Resources\help.png" />
+    <Content Include="Resources\new.png" />
+    <Content Include="Resources\open.png" />
+    <Content Include="Resources\open2.png" />
+    <Content Include="Resources\options.png" />
+    <Content Include="Resources\private.gif" />
+    <Content Include="Resources\properties.gif" />
+    <Content Include="Resources\property.gif" />
+    <Content Include="Resources\public.gif" />
+    <Content Include="Resources\refresh.bmp" />
+    <Content Include="Resources\start.png" />
+    <Content Include="Resources\stop.png" />
+    <Content Include="Resources\target.gif" />
+    <Content Include="Resources\task.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
